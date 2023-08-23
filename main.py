@@ -152,5 +152,5 @@ if __name__ == "__main__":
     scheduleThread = Thread(target=schedule_checker)
     scheduleThread.daemon = True
     scheduleThread.start()
-    schedule.every(10).minutes.do(send_update)
+    schedule.every(1).day.at('12:00').do(send_update)
     bot.polling()

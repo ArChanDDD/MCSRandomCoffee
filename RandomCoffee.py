@@ -1,30 +1,34 @@
 from telebot import types
 import numpy as np
+import json
 from itertools import combinations
 
+
 class RandomCoffee:
-    def __init__(self, ids=None, fac_to_ids=None, id_to_fac=None):
+    def __init__(self, load_files=False):
         self.user_preferences = {}
         self.type_of_user = {}
-        if id_to_fac is None:
-            self.id_to_fac = {}
-        else:
-            self.id_to_fac = id_to_fac
-        if fac_to_ids is None:
-            self.fac_to_ids = {"Математика": [], "Современное Программирование": [], "Науки о Данных": []}
-        else:
-            self.fac_to_ids = fac_to_ids
+        self.id_to_fac = {}
+        self.fac_to_ids = {"Математика": [], "Современное Программирование": [], "Науки о Данных": []}
         self.facs = ["Математика", "Современное Программирование", "Науки о Данных"]
         self.valid_choises = ['Однокурсники', 'Кураторы']
         self.total_choise_variants = ['Однокурсники', 'Кураторы', 'Готово']
         self.preferences_cast = {'odnokur': 'Однокурсники', 'kurator': 'Кураторы', 'choose_done': 'Готово'}
         self.ref_cast = {'Однокурсники': 'odnokur', 'Кураторы': 'kurator', 'Готово': 'choose_done'}
-        if ids is not None:
-            for id in ids:
-                self.add_user(id)
+        if load_files:
+            with open('files/id_to_fac.json', 'r') as f:
+                self.id_to_fac = json.load(f)
+            with open('files/fac_to_ids.json', 'r') as f:
+                self.fac_to_ids = json.load(f)
 
     def add_user(self, user_id):
         self.user_preferences[user_id] = []
+
+    def remove_user(self, user_id):
+        try:
+            del self.user_preferences[user_id]
+        except:
+            pass
 
     def set_status_pervak(self, user_id):
         self.type_of_user[user_id] = 'child'
@@ -49,6 +53,10 @@ class RandomCoffee:
     def add_fac_for_user(self, user_id, fac):
         self.id_to_fac[user_id] = fac
         self.fac_to_ids[fac].append(user_id)
+        with open('files/id_to_fac.json', 'w') as f:
+            json.dump(self.id_to_fac, f)
+        with open('files/fac_to_ids.json', 'w') as f:
+            json.dump(self.fac_to_ids, f)
 
     def get_beautiful_choises_buttons_for_user(self, user_id):
         user_preferences = self.user_preferences[user_id]
@@ -81,7 +89,7 @@ class RandomCoffee:
                         this_type_of.append(k)
                 to_select = this_type_of
                 while len(to_select) > 1:
-                    pair = np.random.choice(this_type_of, 2)
+                    pair = np.random.choice(to_select, 2, replace=False)
                     for p in pair:
                         to_select.remove(p)
                         pair_founded.append(p)
@@ -96,7 +104,7 @@ class RandomCoffee:
                         this_type_of.append(k)
                 to_select = this_type_of
                 while len(to_select) > 1:
-                    pair = np.random.choice(this_type_of, 2)
+                    pair = np.random.choice(to_select, 2, replace=False)
                     for p in pair:
                         to_select.remove(p)
                         pair_founded.append(p)
@@ -114,10 +122,10 @@ class RandomCoffee:
                 # Решено тупа сделать рандомные пары из того что осталось
                 left_users_upd = list(left_users)
                 while len(left_users_upd) > 1:
-                    pair = np.random.choice(left_users_upd, 2)
+                    pair = np.random.choice(left_users_upd, 2, replace=False)
                     for p in pair:
                         left_users_upd.remove(p)
                     pairs.append(pair)
                 if len(left_users_upd) == 1 and len(pair_founded) > 0:
-                    pairs.append([left_users_upd[0], np.random.choice(pair_founded, 1)[0]])
+                    pairs.append([left_users_upd[0], np.random.choice(pair_founded, 1, replace=False)[0]])
         return pairs

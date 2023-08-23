@@ -9,7 +9,6 @@ TOKEN = "6402528524:AAEyRsc1SZ1LIPJt5MAoCGBpNDPdybOMuNU"
 
 bot = telebot.TeleBot(TOKEN)
 
-remembered_ids = []
 choose_message_to_edit = {}
 message_start = {}
 fac_to_ids = {"Математика": [], "Современное Программирование": [], "Науки о Данных": []}
@@ -25,8 +24,9 @@ def schedule_checker():
 
 
 def send_update():
-    global random_coffee_users, id_to_username, remembered_ids
+    global random_coffee_users, id_to_username
     pairs = random_coffee_users.get_pairs()
+    remembered_ids = list(random_coffee_users.user_preferences.keys())
     print('send pairs...')
     for id in remembered_ids:
         good_pairs = []
@@ -51,16 +51,14 @@ def send_update():
         )
         bot.send_message(id, 'Хочешь поучаствовать в Random Coffee на следущей неделе?', reply_markup=markup)
         bot.register_next_step_handler(message_start[id], want_to_do_it_again)
-    remembered_ids = []
     id_to_username = {}
-    random_coffee_users = RandomCoffee(remembered_ids, fac_to_ids, id_to_fac)
+    random_coffee_users = RandomCoffee(load_files=True)
 
 
 def want_to_do_it_again(message):
     if message.text == 'Да':
         bot.send_message(message.chat.id, 'Я знал, что тебе понравится :)')
         random_coffee_users.add_user(message.chat.id)
-        remembered_ids.append(message.chat.id)
         id_to_username[message.chat.id] = message.chat.username
         # random_coffee_users.add_fac_for_user(message.chat.id, message.text)
         random_coffee_users.set_status_pervak(message.chat.id)
@@ -74,7 +72,6 @@ def want_to_do_it_again(message):
 def agree_or_not(message):
     if message.text == 'Да':
         random_coffee_users.add_user(message.chat.id)
-        remembered_ids.append(message.chat.id)
         id_to_username[message.chat.id] = message.chat.username
         print(f'new user - {message.chat.id}')
         print(f'Total users: {len(random_coffee_users.user_preferences)}')
@@ -134,8 +131,6 @@ def start(message):
         return
     chat_id = message.chat.id
     message_start[chat_id] = message
-    if chat_id in remembered_ids:
-        remembered_ids.remove(chat_id)
     markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
     btn1 = types.KeyboardButton("Да")
     btn2 = types.KeyboardButton("Нет")
@@ -150,13 +145,12 @@ def start(message):
 def stop(message):
     chat_id = message.chat.id
     bot.send_message(chat_id, 'Теперь ты больше не участвуешь в Random Coffee')
-    if chat_id in remembered_ids:
-        remembered_ids.remove(chat_id)
+    random_coffee_users.remove_user(chat_id)
 
 
 if __name__ == "__main__":
     scheduleThread = Thread(target=schedule_checker)
     scheduleThread.daemon = True
     scheduleThread.start()
-    schedule.every(1).day.do(send_update)
+    schedule.every(10).minutes.do(send_update)
     bot.polling()

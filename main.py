@@ -5,7 +5,8 @@ from time import sleep
 from telebot import types
 from RandomCoffee import RandomCoffee
 
-TOKEN = "6402528524:AAEyRsc1SZ1LIPJt5MAoCGBpNDPdybOMuNU"
+#TOKEN = "6402528524:AAEyRsc1SZ1LIPJt5MAoCGBpNDPdybOMuNU"
+TOKEN='6356205404:AAEXB__YD4KJ2A4CmOyUVbF0-vp1S2Bj2AM'
 
 bot = telebot.TeleBot(TOKEN)
 
@@ -116,6 +117,7 @@ def callback_query(call):
                               choose_message_to_edit[chat_id])
         bot.send_message(chat_id, 'Я тебя записал!\nВернусь в субботу с парой :)')
         bot.send_message(chat_id, 'Если решишь что-то изменить - просто зарегистрируйся заново!')
+        print(f'User {chat_id} preference is {random_coffee_users.get_preferences(chat_id)}')
         return
     random_coffee_users.add_preference(chat_id, call.data)
     markup = random_coffee_users.get_preferences_markup_for_user(chat_id)

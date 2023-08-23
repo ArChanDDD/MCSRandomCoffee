@@ -11,10 +11,11 @@ class RandomCoffee:
         self.id_to_fac = {}
         self.fac_to_ids = {"Математика": [], "Современное Программирование": [], "Науки о Данных": []}
         self.facs = ["Математика", "Современное Программирование", "Науки о Данных"]
-        self.valid_choises = ['Однокурсники', 'Кураторы']
-        self.total_choise_variants = ['Однокурсники', 'Кураторы', 'Готово']
-        self.preferences_cast = {'odnokur': 'Однокурсники', 'kurator': 'Кураторы', 'choose_done': 'Готово'}
-        self.ref_cast = {'Однокурсники': 'odnokur', 'Кураторы': 'kurator', 'Готово': 'choose_done'}
+        self.valid_choises = ['Однокурсники', 'Кураторы', 'Другое направление']
+        self.total_choise_variants = self.valid_choises + ['Готово']
+        self.ref_cast = {'Однокурсники': 'odnokur', 'Кураторы': 'kurator', 'Готово': 'choose_done',
+                         'Другое направление': 'other_fac'}
+        self.preferences_cast = {v:k for k,v in self.ref_cast.items()}
         if load_files:
             with open('files/id_to_fac.json', 'r') as f:
                 self.id_to_fac = json.load(f)

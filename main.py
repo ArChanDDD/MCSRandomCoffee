@@ -188,6 +188,6 @@ if __name__ == "__main__":
     scheduleThread = Thread(target=schedule_checker)
     scheduleThread.daemon = True
     scheduleThread.start()
-    # schedule.every(1).day.at('12:00').do(send_update)
-    schedule.every(30).seconds.do(send_update)
+    schedule.every(1).day.at('12:00').do(send_update)
+    #schedule.every(30).seconds.do(send_update)
     bot.polling()

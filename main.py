@@ -42,14 +42,14 @@ def send_update():
     # Send if pair not found
     for id in not_found:
         bot.send_message(id,
-                         'Привет!\nК сожалению, на этой неделе не смог найти для тебя пару :(\nНе переживай, на следующей неделе обязательно найдем!')
+                         'Привет!\nК сожалению, на этой неделе не смог найти для тебя пару 😢\nНе переживай, на следующей неделе обязательно найдем!')
 
     # Send if pair was found
     for p in pairs:
         bot.send_message(p[0],
-                         'Привет!\n' + f'На этой неделе твоя пара - @{id_to_username[p[1]]}\nС тебя встреча - в зуме, или очно, думаю вы договоритесь :)')
+                         'Привет!\n' + f'На этой неделе твоя пара - @{id_to_username[p[1]]}\nС тебя встреча - в зуме, или очно, думаю вы договоритесь 😌')
         bot.send_message(p[1],
-                         'Привет!\n' + f'На этой неделе твоя пара - @{id_to_username[p[0]]}\nВстреча с партнера, но можешь и ты проявить инициативу :)')
+                         'Привет!\n' + f'На этой неделе твоя пара - @{id_to_username[p[0]]}\nВстреча с партнера, но можешь и ты проявить инициативу 😉')
 
     remembered_ids = list(random_coffee_users.user_preferences.keys())
     markup = types.ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=True)
@@ -66,7 +66,7 @@ def send_update():
 
 def want_to_do_it_again(message):
     if message.text == 'Да':
-        bot.send_message(message.chat.id, 'Я знал, что тебе понравится :)')
+        bot.send_message(message.chat.id, 'Я знал, что тебе понравится 😁')
         random_coffee_users.add_user(message.chat.id)
         random_coffee_users.add_fac_for_user(message.chat.id)
         id_to_username[message.chat.id] = message.chat.username
@@ -100,9 +100,9 @@ def agree_or_not(message):
         bot.send_message(message.chat.id, 'Отлично!\nСкажи, какое у тебя направление?', reply_markup=markup)
         bot.register_next_step_handler(message, choose_program)
     elif message.text == 'Нет':
-        bot.send_message(message.chat.id, 'Ну ладно :(')
+        bot.send_message(message.chat.id, 'Ну ладно 😢')
     else:
-        bot.send_message(message.chat.id, 'Лучше пользуйся кнопками :)')
+        bot.send_message(message.chat.id, 'Лучше пользуйся кнопками 🙃')
         bot.register_next_step_handler(message, agree_or_not)
 
 
@@ -118,7 +118,7 @@ def choose_program(message):
                                       reply_markup=markup).message_id
         choose_message_to_edit[message.chat.id] = message_id
     else:
-        bot.send_message(message.chat.id, 'Лучше пользоваться кнопками :)')
+        bot.send_message(message.chat.id, 'Лучше пользоваться кнопками 🙃')
         bot.register_next_step_handler(message, choose_program)
 
 
@@ -131,7 +131,7 @@ def callback_query(call):
             return
         bot.edit_message_text(f'Ты выбрал: {",".join(random_coffee_users.get_preferences(chat_id))}', chat_id,
                               choose_message_to_edit[chat_id])
-        bot.send_message(chat_id, 'Я тебя записал!\nВернусь в субботу с парой :)')
+        bot.send_message(chat_id, 'Я тебя записал!\nВернусь в субботу с парой 😉')
         bot.send_message(chat_id, 'Если решишь что-то изменить - просто зарегистрируйся заново!')
         print(f'User {chat_id} preference is {random_coffee_users.get_preferences(chat_id)}')
         return
@@ -145,7 +145,7 @@ def callback_query(call):
 def start(message):
     if message.chat.username is None:
         bot.send_message(message.chat.id,
-                         'Кажется, у тебя не установлен nickname в telegram, я не смогу дать на тебя ссылку :(\nУстанови его, пожалуйста, через настройки профиля - это очень важная штука, уж поверь)')
+                         'Кажется, у тебя не установлен nickname в telegram, я не смогу дать на тебя ссылку 😢\nУстанови его, пожалуйста, через настройки профиля - это очень важная штука, уж поверь)')
         return
     chat_id = message.chat.id
     message_start[chat_id] = message
@@ -154,7 +154,7 @@ def start(message):
     btn2 = types.KeyboardButton("Нет")
     markup.add(btn1, btn2)
     bot.send_message(chat_id,
-                     'Привет!\nДобро пожаловать в Random Coffee. Здесь ты можешь выбрать категорию людей, с которыми ты хотел бы пообщаться, а я выберу тебе случайного собеседника :)\nНачнем?',
+                     'Привет!\nДобро пожаловать в Random Coffee. Здесь ты можешь выбрать категорию людей, с которыми ты хотел бы пообщаться, а я выберу тебе случайного собеседника 😁\nНачнем?',
                      reply_markup=markup)
     bot.register_next_step_handler(message, agree_or_not)
 
@@ -180,7 +180,7 @@ def kurator_mode(message):
         return
     print(f'new kurator - {chat_id}')
     bot.send_message(chat_id,
-                     'Запомнил тебя как куратора:)\nТеперь с тобой смогут общаться только твои дети. Увы, такие правила.')
+                     'Запомнил тебя как куратора 😎\nТеперь с тобой смогут общаться только твои дети.👨‍👧‍👧 Увы, такие правила.')
 
 
 if __name__ == "__main__":
@@ -189,5 +189,5 @@ if __name__ == "__main__":
     scheduleThread.daemon = True
     scheduleThread.start()
     schedule.every(1).day.at('12:00').do(send_update)
-    #schedule.every(30).seconds.do(send_update)
+    # schedule.every(30).seconds.do(send_update)
     bot.polling()

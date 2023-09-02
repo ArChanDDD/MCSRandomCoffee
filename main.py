@@ -7,8 +7,10 @@ from RandomCoffee import RandomCoffee
 from Logs2File import Logs2File
 import os
 import sys
+import json
 
-TOKEN = os.environ.get("MCSRandomCoffeeTOKEN") or '6356205404:AAEXB__YD4KJ2A4CmOyUVbF0-vp1S2Bj2AM'
+with open('../tokens.json', 'r') as f:
+     TOKEN = json.load(f)['MCSRandomCoffeeTOKEN']
 
 bot = telebot.TeleBot(TOKEN)
 

@@ -5,12 +5,14 @@ from time import sleep
 from telebot import types
 from RandomCoffee import RandomCoffee
 from Logs2File import Logs2File
-import os
 import sys
 import json
 
-with open('../tokens.json', 'r') as f:
-     TOKEN = json.load(f)['MCSRandomCoffeeTOKEN']
+try:
+    with open('../tokens.json', 'r') as f:
+        TOKEN = json.load(f)['MCSRandomCoffeeTOKEN']
+except:
+    TOKEN = '6356205404:AAEXB__YD4KJ2A4CmOyUVbF0-vp1S2Bj2AM'
 
 bot = telebot.TeleBot(TOKEN)
 

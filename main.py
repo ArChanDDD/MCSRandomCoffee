@@ -8,11 +8,11 @@ from Logs2File import Logs2File
 import sys
 import json
 
-#try:
-with open('../tokens.json', 'r') as f:
-    TOKEN = json.load(f)['MCSRandomCoffeeTOKEN']
-#except:
-#    TOKEN = '6356205404:AAEXB__YD4KJ2A4CmOyUVbF0-vp1S2Bj2AM'
+try:
+    with open('../tokens.json', 'r') as f:
+        TOKEN = json.load(f)['MCSRandomCoffeeTOKEN']
+except:
+    TOKEN = '6356205404:AAEXB__YD4KJ2A4CmOyUVbF0-vp1S2Bj2AM'
 
 bot = telebot.TeleBot(TOKEN)
 

@@ -44,8 +44,8 @@ def send_update():
     print('send pairs...')
 
     # Send if pair not found
-    for id in not_found:
-        bot.send_message(id,
+    for user_id in not_found:
+        bot.send_message(user_id,
                          'Привет!\nК сожалению, на этой неделе не смог найти для тебя пару 😢\nНе переживай, на следующей неделе обязательно найдем!')
 
     # Send if pair was found
@@ -192,6 +192,6 @@ if __name__ == "__main__":
     scheduleThread = Thread(target=schedule_checker)
     scheduleThread.daemon = True
     scheduleThread.start()
-    schedule.every(1).day.at('14:00').do(send_update)
-    # schedule.every(30).seconds.do(send_update)
+    #schedule.every(1).day.at('14:00').do(send_update)
+    schedule.every(1).hour.do(send_update)
     bot.polling()

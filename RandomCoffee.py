@@ -231,7 +231,6 @@ class RandomCoffee:
             next_time[self.id_to_fac[pervaki_for_pair[0]]].append(pervaki_for_pair[0])
 
         # kto ostalsya
-        not_found_pairs = []
         to_other_napr_part_2 = []
         for fac in self.facs:
             while len(next_time[fac]) != 0:
@@ -264,7 +263,6 @@ class RandomCoffee:
                     next_time[fac].remove(cur_user)
                     pair_founded = True
                 if not pair_founded:
-                    not_found_pairs.append(cur_user)
                     next_time[fac].remove(cur_user)
 
         # different napravleniya part 2
@@ -276,11 +274,10 @@ class RandomCoffee:
                 maybe_pairs.remove(x)
                 total_students_to_pairing.remove(x)
             pairs.append(pair)
-        if len(maybe_pairs) == 1:
-            not_found_pairs.append(maybe_pairs[0])
 
-        for fac in self.facs:
-            for id, val in kurator_pairs_count[fac].items():
-                if val == 0:
-                    not_found_pairs.append(id)
+        total_students_to_pairing_with_kurators = set(
+            [item for sublist in total_students_not_flatten for item in sublist])
+        students_with_pairs = set([item for sublist in pairs for item in sublist])
+        not_found_pairs = list(total_students_to_pairing_with_kurators.difference(students_with_pairs))
+
         return [list(x) for x in pairs], not_found_pairs

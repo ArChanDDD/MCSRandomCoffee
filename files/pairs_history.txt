@@ -1,7 +1,0 @@
-
-
-[['glebrossomaxa', 'mcsimik']]
-['ArChanDD']
-
-[['mcsimik', 'likhhtar']]
-['moy_key', 'mcsimik', 'ArChanDD']

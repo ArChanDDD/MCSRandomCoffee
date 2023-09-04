@@ -1,5 +1,6 @@
 import schedule
 import telebot
+import numpy as np
 from threading import Thread
 from time import sleep
 from telebot import types
@@ -7,6 +8,7 @@ from RandomCoffee import RandomCoffee
 from Logs2File import Logs2File
 import sys
 import json
+from datetime import date
 
 try:
     with open('../tokens.json', 'r') as f:
@@ -31,8 +33,25 @@ def schedule_checker():
 
 
 def send_update():
+    if date.today().weekday() != 5:
+        return
     global random_coffee_users, id_to_username
-    pairs, not_found = random_coffee_users.get_pairs()
+    pre_pairs, not_found = random_coffee_users.get_pairs()
+    pairs = []
+    not_found_to_send = not_found.copy()
+    for pair in pre_pairs:
+        if pair not in pairs:
+            pairs.append(pair)
+
+    while len(not_found) > 1:
+        pair = np.random.choice(not_found, 2, False)
+        for user_id in pair:
+            try:
+                not_found.remove(user_id)
+            except:
+                pass
+        pairs.append(pair)
+
     try:
         with open('files/pairs_history.txt', 'a') as f:
             prep_pairs = [[id_to_username[p[0]], id_to_username[p[1]]] for p in pairs]
@@ -44,9 +63,9 @@ def send_update():
     print('send pairs...')
 
     # Send if pair not found
-    for user_id in not_found:
+    for user_id in not_found_to_send:
         bot.send_message(user_id,
-                         'Привет!\nК сожалению, на этой неделе не смог найти для тебя пару 😢\nНе переживай, на следующей неделе обязательно найдем!')
+                         'Привет!\nК сожалению, на этой неделе не смог найти для тебя пару по твоим предпочтениям😢\nНо нашел другую классную пару!')
 
     # Send if pair was found
     for p in pairs:
@@ -54,6 +73,15 @@ def send_update():
                          'Привет!\n' + f'На этой неделе твоя пара - @{id_to_username[p[1]]}\nС тебя встреча - в зуме, или очно, думаю вы договоритесь 😌')
         bot.send_message(p[1],
                          'Привет!\n' + f'На этой неделе твоя пара - @{id_to_username[p[0]]}\nВстреча с партнера, но можешь и ты проявить инициативу 😉')
+
+    try:
+        if len(not_found) == 1:
+            bot.send_message(not_found[0],
+                             'Привет!\n' + f'На этой неделе твоя пара - @{id_to_username[964993301]}\nС тебя встреча - в зуме, или очно, думаю вы договоритесь 😌')
+            bot.send_message(964993301,
+                             'Привет!\n' + f'На этой неделе у тебя экстрапара - @{id_to_username[not_found[0]]}\nВстреча с партнера, но можешь и ты проявить инициативу 😉')
+    except:
+        pass
 
     remembered_ids = list(random_coffee_users.user_preferences.keys())
     markup = types.ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=True)
@@ -133,7 +161,7 @@ def callback_query(call):
         if len(random_coffee_users.user_preferences[chat_id]) == 0:
             bot.send_message(chat_id, 'Нужно выбрать хотя бы одну категорию')
             return
-        bot.edit_message_text(f'Ты выбрал: {",".join(random_coffee_users.get_preferences(chat_id))}', chat_id,
+        bot.edit_message_text(f'Твой выбор: {",".join(random_coffee_users.get_preferences(chat_id))}', chat_id,
                               choose_message_to_edit[chat_id])
         bot.send_message(chat_id, 'Я тебя записал!\nВернусь в субботу с парой 😉')
         bot.send_message(chat_id, 'Если решишь что-то изменить - просто зарегистрируйся заново!')
@@ -192,6 +220,6 @@ if __name__ == "__main__":
     scheduleThread = Thread(target=schedule_checker)
     scheduleThread.daemon = True
     scheduleThread.start()
-    #schedule.every(1).day.at('14:00').do(send_update)
-    schedule.every(1).hour.do(send_update)
+    schedule.every(1).day.at('12:00').do(send_update)
+    # schedule.every(1).minute.do(send_update)
     bot.polling()

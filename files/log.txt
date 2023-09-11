@@ -161,3 +161,22 @@ User 444190866 preference is ['Другое направление', 'Однок
 new user - 958502648
 Total users: 38
 User 958502648 preference is ['Однокурсники', 'Кураторы', 'Другое направление']
+send pairs...
+new user - 364170791
+Total users: 1
+User 364170791 preference is ['Однокурсники', 'Другое направление']
+new user - 1792560703
+Total users: 2
+User 1792560703 preference is ['Однокурсники']
+new user - 966860485
+Total users: 3
+User 966860485 preference is ['Однокурсники']
+new user - 364170791
+Total users: 3
+User 364170791 preference is ['Однокурсники', 'Другое направление']
+new user - 364170791
+Total users: 3
+User 364170791 preference is ['Однокурсники', 'Другое направление']
+new user - 364170791
+Total users: 3
+User 364170791 preference is ['Однокурсники', 'Кураторы']

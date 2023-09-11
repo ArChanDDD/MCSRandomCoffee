@@ -220,12 +220,12 @@ def send_to_all(message):
     def snd_msg(msg):
         for user_id in (random_coffee_users.type_of_user.keys()):
             try:
-                bot.send_message(user_id, msg.text)
+                bot.send_message(int(user_id), msg.text)
             except:
                 pass
         bot.send_message(msg.chat.id, 'Готово')
-
-    bot.register_next_step_handler(message.chat.id, snd_msg)
+    bot.send_message(message.chat.id, 'Отправь мне сообщение - а я отправлю его всем 😎')
+    bot.register_next_step_handler(message, snd_msg)
 
 
 if __name__ == "__main__":

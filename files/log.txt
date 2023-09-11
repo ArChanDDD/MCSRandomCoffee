@@ -1,3 +1,6 @@
 new user - 364170791
 Total users: 1
 User 364170791 preference is ['Однокурсники', 'Другое направление']
+new user - 364170791
+Total users: 1
+User 364170791 preference is ['Другое направление', 'Кураторы', 'Однокурсники']

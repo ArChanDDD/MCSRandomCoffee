@@ -1,0 +1,163 @@
+new user - 364170791
+Total users: 1
+User 364170791 preference is ['Однокурсники', 'Другое направление']
+new user - 475853874
+Total users: 2
+new kurator - 475853874
+new user - 1266725074
+Total users: 3
+User 1266725074 preference is ['Кураторы']
+new kurator - 1266725074
+new user - 1122909564
+Total users: 4
+User 1122909564 preference is ['Другое направление']
+new user - 1122909564
+Total users: 4
+User 1122909564 preference is ['Другое направление']
+new kurator - 1122909564
+new user - 412039113
+Total users: 5
+User 412039113 preference is ['Однокурсники']
+new kurator - 412039113
+new user - 283857012
+Total users: 6
+new kurator - 283857012
+new user - 458698163
+Total users: 1
+User 458698163 preference is ['Однокурсники']
+new kurator - 458698163
+new user - 694457083
+Total users: 2
+User 694457083 preference is ['Кураторы']
+new user - 964993301
+Total users: 3
+User 964993301 preference is ['Однокурсники', 'Кураторы', 'Другое направление']
+new user - 1092924072
+Total users: 4
+new kurator - 964993301
+new user - 1532670753
+Total users: 5
+User 1092924072 preference is ['Однокурсники', 'Кураторы', 'Другое направление']
+new user - 364170791
+Total users: 6
+new user - 966860485
+Total users: 7
+User 364170791 preference is ['Однокурсники', 'Другое направление']
+new kurator - 1532670753
+User 966860485 preference is ['Однокурсники']
+new user - 1534343549
+Total users: 8
+User 1534343549 preference is ['Однокурсники', 'Кураторы', 'Другое направление']
+new user - 998363034
+Total users: 9
+User 998363034 preference is ['Другое направление', 'Однокурсники']
+new user - 694457083
+Total users: 9
+new user - 1440894647
+Total users: 10
+new user - 5584442222
+Total users: 11
+User 5584442222 preference is ['Однокурсники', 'Другое направление', 'Кураторы']
+new user - 5584442222
+Total users: 11
+User 5584442222 preference is ['Другое направление', 'Кураторы', 'Однокурсники']
+new user - 5584442222
+Total users: 11
+User 5584442222 preference is ['Другое направление', 'Однокурсники']
+new user - 966012120
+Total users: 12
+User 966012120 preference is ['Однокурсники']
+new user - 934760460
+Total users: 12
+new user - 1264632086
+Total users: 13
+User 934760460 preference is ['Однокурсники']
+User 1264632086 preference is ['Кураторы', 'Однокурсники']
+new user - 349086420
+Total users: 14
+User 349086420 preference is ['Однокурсники']
+new user - 322069646
+Total users: 15
+User 322069646 preference is ['Другое направление']
+new user - 672566012
+Total users: 16
+User 672566012 preference is ['Однокурсники', 'Другое направление']
+new user - 1659671470
+Total users: 17
+User 1659671470 preference is ['Другое направление', 'Однокурсники']
+new user - 1416503026
+Total users: 18
+User 1416503026 preference is ['Однокурсники']
+new user - 540452717
+Total users: 19
+new user - 1173935353
+Total users: 20
+User 1173935353 preference is ['Однокурсники', 'Другое направление']
+new user - 1173935353
+Total users: 20
+User 1173935353 preference is ['Другое направление', 'Однокурсники']
+new user - 1611524415
+Total users: 21
+User 1611524415 preference is ['Однокурсники', 'Другое направление']
+new user - 1173935353
+Total users: 21
+User 1173935353 preference is ['Однокурсники', 'Кураторы', 'Другое направление']
+new user - 872126305
+Total users: 22
+new user - 1407152792
+Total users: 23
+User 1407152792 preference is ['Другое направление', 'Кураторы', 'Однокурсники']
+new user - 1407152792
+Total users: 23
+User 1407152792 preference is ['Другое направление', 'Однокурсники', 'Кураторы']
+new user - 1032887384
+Total users: 24
+User 1032887384 preference is ['Однокурсники', 'Кураторы', 'Другое направление']
+new user - 1885416387
+Total users: 25
+User 1885416387 preference is ['Однокурсники', 'Кураторы', 'Другое направление']
+User 872126305 preference is ['Однокурсники', 'Другое направление']
+new user - 716728056
+Total users: 26
+User 716728056 preference is ['Однокурсники', 'Другое направление']
+new user - 2021223295
+Total users: 27
+new user - 1488708728
+Total users: 28
+User 1488708728 preference is ['Другое направление']
+new user - 1288411939
+Total users: 29
+User 1288411939 preference is ['Однокурсники']
+new user - 1792560703
+Total users: 30
+User 1792560703 preference is ['Однокурсники', 'Кураторы']
+new user - 1792560703
+Total users: 30
+User 1792560703 preference is ['Однокурсники', 'Другое направление', 'Кураторы']
+new user - 416627570
+Total users: 31
+User 416627570 preference is ['Однокурсники', 'Кураторы', 'Другое направление']
+new kurator - 416627570
+new user - 605133553
+Total users: 32
+User 605133553 preference is ['Однокурсники']
+new user - 807189493
+Total users: 33
+User 807189493 preference is ['Однокурсники']
+new user - 5986296819
+Total users: 34
+User 5986296819 preference is ['Однокурсники']
+new user - 5986296819
+Total users: 34
+User 5986296819 preference is ['Однокурсники', 'Кураторы', 'Другое направление']
+new user - 426721185
+Total users: 35
+new user - 947095016
+Total users: 36
+User 947095016 preference is ['Однокурсники']
+new user - 444190866
+Total users: 37
+User 444190866 preference is ['Другое направление', 'Однокурсники']
+new user - 958502648
+Total users: 38
+User 958502648 preference is ['Однокурсники', 'Кураторы', 'Другое направление']

@@ -1,0 +1,3 @@
+new user - 364170791
+Total users: 1
+User 364170791 preference is ['Однокурсники', 'Другое направление']

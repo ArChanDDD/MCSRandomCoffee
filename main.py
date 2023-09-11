@@ -23,7 +23,7 @@ message_start = {}
 fac_to_ids = {"Математика": [], "Современное Программирование": [], "Науки о Данных": []}
 id_to_fac = {}
 id_to_username = {}
-random_coffee_users = RandomCoffee()
+random_coffee_users = RandomCoffee(load_files=True)
 
 
 def schedule_checker():
@@ -33,7 +33,7 @@ def schedule_checker():
 
 
 def send_update():
-    if date.today().weekday() != 5:
+    if date.today().weekday() != 2:
         return
     global random_coffee_users, id_to_username
     pre_pairs, not_found = random_coffee_users.get_pairs()
@@ -163,7 +163,7 @@ def callback_query(call):
             return
         bot.edit_message_text(f'Твой выбор: {",".join(random_coffee_users.get_preferences(chat_id))}', chat_id,
                               choose_message_to_edit[chat_id])
-        bot.send_message(chat_id, 'Я тебя записал!\nВернусь в субботу с парой 😉')
+        bot.send_message(chat_id, 'Я тебя записал!\nВернусь в среду с парой 😉')
         bot.send_message(chat_id, 'Если решишь что-то изменить - просто зарегистрируйся заново!')
         print(f'User {chat_id} preference is {random_coffee_users.get_preferences(chat_id)}')
         return
@@ -215,6 +215,19 @@ def kurator_mode(message):
                      'Запомнил тебя как куратора 😎\nТеперь с тобой смогут общаться только твои дети.👨‍👧‍👧 Увы, такие правила.')
 
 
+@bot.message_handler(commands=['send_to_all'])
+def send_to_all(message):
+    def snd_msg(msg):
+        for user_id in (random_coffee_users.type_of_user.keys()):
+            try:
+                bot.send_message(user_id, msg.text)
+            except:
+                pass
+        bot.send_message(msg.chat.id, 'Готово')
+
+    bot.register_next_step_handler(message.chat.id, snd_msg)
+
+
 if __name__ == "__main__":
     sys.stdout = Logs2File('files/log.txt', 'a')
     scheduleThread = Thread(target=schedule_checker)
@@ -222,4 +235,4 @@ if __name__ == "__main__":
     scheduleThread.start()
     schedule.every(1).day.at('12:00').do(send_update)
     # schedule.every(1).minute.do(send_update)
-    bot.polling()
+    bot.polling(non_stop=True)

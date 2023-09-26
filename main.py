@@ -235,4 +235,5 @@ if __name__ == "__main__":
     scheduleThread.start()
     schedule.every(1).day.at('12:00').do(send_update)
     # schedule.every(1).minute.do(send_update)
-    bot.polling(non_stop=True)
+    #bot.polling(non_stop=True)
+    bot.infinity_polling()
